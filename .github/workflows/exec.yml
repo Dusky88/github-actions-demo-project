@@ -50,8 +50,7 @@ jobs:
       # 4. Upload build to EC2
       - name: Upload build to server
         run: scp dist.tar.gz ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_PATH }}
-    # 5. Extract build on EC2
+     # 5. Extract build on EC2
       - name: Extract build on server
         run: |
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'tar -xzf ${{ secrets.SERVER_PATH }}/dist.tar.gz -C ${{ secrets.SERVER_PATH }}'
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'rm ${{ secrets.SERVER_PATH }}/dist.tar.gz'
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'cd ${{ secrets.SERVER_PATH }} && tar -xzf dist.tar.gz && rm dist.tar.gz'
